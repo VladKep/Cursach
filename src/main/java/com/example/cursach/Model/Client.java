@@ -35,7 +35,7 @@ public class Client {
     @NotEmpty
     @Column(name = "Email")
     private String email;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Note> notes;
 
     public Client(String firstName, String secondName, String phoneNumber, String email) {
