@@ -1,15 +1,18 @@
 package com.example.cursach.Controller;
 
+import com.example.cursach.ClientService.ParkingSpotService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-    @GetMapping("/hello")
-    public String greetings(Model model, @RequestParam(value = "name", required = false, defaultValue = "User") String name) {
-        model.addAttribute("name", name);
+    @Autowired
+    private ParkingSpotService parkingSpotService;
+
+    @GetMapping("/available")
+    public String availableSpots() {
+        System.out.println(parkingSpotService.availableParkingSpots());
         return "hello";
     }
 }
