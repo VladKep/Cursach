@@ -5,6 +5,8 @@
     <title>Hello</title>
 </head>
 <body>
-    <h2 th:text="${'Hello, ' + name}"></h2>
+    <div th:each="av : ${available}">
+        <p th:text="'Адреса: ' + ${av.getAddress()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p>
+    </div>
 </body>
 </html>
