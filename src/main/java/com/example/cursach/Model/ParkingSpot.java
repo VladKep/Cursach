@@ -35,4 +35,13 @@ public class ParkingSpot {
         this.price = price;
         this.notes = notes;
     }
+
+    @Override
+    public String toString() {
+        return "ParkingSpot{" +
+                "address='" + address + '\'' +
+                ", status='" + status + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

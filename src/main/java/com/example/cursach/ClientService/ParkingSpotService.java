@@ -17,6 +17,6 @@ public class ParkingSpotService {
     }
 
     public List<ParkingSpot> availableParkingSpots() {
-        return parkingSpotRepository.findParkingSpotsByStatus("Available");
+        return parkingSpotRepository.findParkingSpotsByStatus("Вільно");
     }
 }
