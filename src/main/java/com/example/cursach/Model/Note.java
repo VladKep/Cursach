@@ -31,11 +31,21 @@ public class Note {
     @JoinColumn(name = "ParkingSpot_ID", referencedColumnName = "ID")
     private ParkingSpot parkingSpot;
 
-    public Note(LocalDateTime startTime, LocalDateTime endTime, Double finalPrice, Client client, ParkingSpot parkingSpot) {
+    public Note(LocalDateTime startTime, LocalDateTime endTime, Client client, ParkingSpot parkingSpot) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.finalPrice = (double) parkingSpot.getPrice() * Duration.between(startTime, endTime).toHours();
         this.client = client;
         this.parkingSpot = parkingSpot;
+    }
+
+    @Override
+    public String toString() {
+        return "Id=" + id +
+                ", Start Time=" + startTime +
+                ", End Time=" + endTime +
+                ", Final Price=" + finalPrice +
+                ", Client=" + client.getFirstName() + " " + client.getSecondName() +
+                ", Parking Spot=" + parkingSpot.getAddress();
     }
 }

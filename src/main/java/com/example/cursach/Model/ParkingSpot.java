@@ -26,7 +26,7 @@ public class ParkingSpot {
     @NotEmpty
     @Column(name = "Price")
     private int price;
-    @OneToMany(mappedBy = "parkingSpot")
+    @OneToMany(mappedBy = "parkingSpot", cascade = CascadeType.PERSIST)
     private List<Note> notes;
 
     public ParkingSpot(String address, String status, int price, List<Note> notes) {

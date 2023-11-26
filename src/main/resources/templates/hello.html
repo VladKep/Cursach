@@ -6,7 +6,7 @@
 </head>
 <body>
     <div th:each="av : ${available}">
-        <p th:text="'Адреса: ' + ${av.getAddress()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p>
+        <p th:text="'ID: ' + ${av.getId()} + 'Адреса: ' + ${av.getAddress()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p>
     </div>
 </body>
 </html>
