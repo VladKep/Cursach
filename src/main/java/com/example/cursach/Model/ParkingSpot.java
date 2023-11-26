@@ -38,10 +38,8 @@ public class ParkingSpot {
 
     @Override
     public String toString() {
-        return "ParkingSpot{" +
-                "address='" + address + '\'' +
+        return "address='" + address + '\'' +
                 ", status='" + status + '\'' +
-                ", price=" + price +
-                '}';
+                ", price=" + price;
     }
 }
