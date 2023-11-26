@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <div style="background-color: chartreuse; margin: 2px; padding: 5px; display: inline-block; width: auto;
+   border-radius: 10px; border: 2px solid #333">
+        <div th:each="av : ${available}">
+            <p th:text="'ID: ' + ${av.getId()} + ' Адреса: ' + ${av.getAddress()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p><hr>
+        </div>
+    </div>
+
+</body>
+</html>
