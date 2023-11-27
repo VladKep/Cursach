@@ -9,7 +9,7 @@
   <div style="background-color: chartreuse; margin: 2px; padding: 5px; display: inline-block; width: auto;
    border-radius: 10px; border: 2px solid #333">
     <div  th:each="client : ${clients}">
-      <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getFirstName()} + ' ' + ${client.getSecondName()} +
+      <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUserName()} + ' '  +
 ' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
     </div>
   </div>
