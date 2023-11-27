@@ -20,12 +20,8 @@ public class Client {
     private int id;
     @NotEmpty
     @UniqueElements
-    @Column(name = "FirstName")
-    private String firstName;
-    @NotEmpty
-    @UniqueElements
-    @Column(name = "SecondName")
-    private String secondName;
+    @Column(name = "UserName")
+    private String userName;
     @NotEmpty
     @UniqueElements
     @Column(name = "PhoneNumber")
@@ -35,13 +31,23 @@ public class Client {
     @NotEmpty
     @Column(name = "Email")
     private String email;
+    @NotEmpty
+    @Column(name = "password")
+    private String password;
     @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Note> notes;
 
-    public Client(String firstName, String secondName, String phoneNumber, String email) {
-        this.firstName = firstName;
-        this.secondName = secondName;
+    public Client(String userName, String phoneNumber, String email, String password) {
+        this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserName=" + userName + '\'' +
+                ", phoneNumber=" + phoneNumber + '\'' +
+                ", email=" + email + '\'';
     }
 }

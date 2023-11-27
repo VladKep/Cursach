@@ -45,7 +45,7 @@ public class Note {
                 ", Start Time=" + startTime +
                 ", End Time=" + endTime +
                 ", Final Price=" + finalPrice +
-                ", Client=" + client.getFirstName() + " " + client.getSecondName() +
+                ", Client=" + client.getUserName() +
                 ", Parking Spot=" + parkingSpot.getAddress();
     }
 }
