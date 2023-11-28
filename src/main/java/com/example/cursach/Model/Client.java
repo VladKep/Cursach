@@ -21,7 +21,7 @@ public class Client {
     @NotEmpty
     @UniqueElements
     @Column(name = "UserName")
-    private String userName;
+    private String username;
     @NotEmpty
     @UniqueElements
     @Column(name = "PhoneNumber")
@@ -37,8 +37,8 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Note> notes;
 
-    public Client(String userName, String phoneNumber, String email, String password) {
-        this.userName = userName;
+    public Client(String username, String phoneNumber, String email, String password) {
+        this.username = username;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
@@ -46,7 +46,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "UserName=" + userName + '\'' +
+        return "UserName=" + username + '\'' +
                 ", phoneNumber=" + phoneNumber + '\'' +
                 ", email=" + email + '\'';
     }
