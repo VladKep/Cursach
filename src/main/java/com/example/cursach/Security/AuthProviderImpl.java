@@ -1,6 +1,6 @@
 package com.example.cursach.Security;
 
-import com.example.cursach.ClientService.ClientDetailService;
+import com.example.cursach.Service.ClientDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

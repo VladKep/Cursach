@@ -19,15 +19,11 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotEmpty
-    @UniqueElements
     @Column(name = "UserName")
     private String username;
     @NotEmpty
-    @UniqueElements
     @Column(name = "PhoneNumber")
     private String phoneNumber;
-    @Email
-    @UniqueElements
     @NotEmpty
     @Column(name = "Email")
     private String email;
