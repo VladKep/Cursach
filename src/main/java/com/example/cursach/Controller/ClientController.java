@@ -1,6 +1,6 @@
 package com.example.cursach.Controller;
 
-import com.example.cursach.ClientService.ParkingSpotService;
+import com.example.cursach.Service.ParkingSpotService;
 import com.example.cursach.Security.ClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

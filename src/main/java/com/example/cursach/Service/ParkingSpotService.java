@@ -1,4 +1,4 @@
-package com.example.cursach.ClientService;
+package com.example.cursach.Service;
 
 import com.example.cursach.Model.ParkingSpot;
 import com.example.cursach.Repository.ParkingSpotRepository;
