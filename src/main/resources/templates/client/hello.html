@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+            font-family: AppleSystemUIFont;
+        }
+        div {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            margin: 0;
+        }
+        hr {
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    <div style="background-color: chartreuse; margin: 2px; padding: 5px; display: inline-block; width: auto;
-   border-radius: 10px; border: 2px solid #333">
+    <h2>Вільні місця</h2>
+    <div>
         <div th:each="av : ${available}">
             <p th:text="'ID: ' + ${av.getId()} + ' Адреса: ' + ${av.getAddress()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p><hr>
         </div>
