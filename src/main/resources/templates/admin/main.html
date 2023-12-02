@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        div {
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 0;
+            padding: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
   <h2>Clients:</h2>
-  <div style="background-color: chartreuse; margin: 2px; padding: 5px; display: inline-block; width: auto;
-   border-radius: 10px; border: 2px solid #333">
-    <div  th:each="client : ${clients}">
-      <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
-' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
+    <div>
+        <div  th:each="client : ${clients}">
+            <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
+            ' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
+        </div>
     </div>
-  </div>
-
 </body>
 </html>
