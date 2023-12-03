@@ -33,4 +33,9 @@ public class ClientController {
         System.out.println(clientDetails.getClient());
         return "client/hello";
     }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin/main";
+    }
 }

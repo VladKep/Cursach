@@ -1,9 +1,6 @@
 package com.example.cursach.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -12,7 +9,8 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class Client {
     @Id
     @Column(name = "ID")
@@ -32,6 +30,8 @@ public class Client {
     private String password;
     @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Note> notes;
+    @Column(name = "Role")
+    private String role;
 
     public Client(String username, String phoneNumber, String email, String password) {
         this.username = username;
