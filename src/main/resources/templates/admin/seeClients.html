@@ -26,11 +26,24 @@
     </style>
 </head>
 <body>
-  <h2>Clients:</h2>
+    <h2>Користувачі:</h2>
     <div>
-        <div  th:each="client : ${clients}">
-            <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
+        <div>
+            <h2>Адміністратори:</h2>
+            <div th:each="client : ${clients}">
+                <div th:if="${client.getRole()} != 'ROLE_USER'">
+                    <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
             ' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
+                </div>
+            </div>
+        </div>
+
+        <h2>Клієнти:</h2>
+        <div th:each="client : ${clients}">
+            <div th:if="${client.getRole()} != 'ROLE_ADMIN'">
+                <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
+          ' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
+            </div>
         </div>
     </div>
 </body>

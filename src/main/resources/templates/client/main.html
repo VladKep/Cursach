@@ -36,6 +36,9 @@
 </head>
 <body>
 <a href="/available">To available stops</a>
+<div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <br><br><a href="/admin">На сторінку адміністратора</a>
+</div>
 <form th:action="@{/logout}" th:method="POST">
     <input type="submit" value="Вийти з аккаунту">
 </form>
