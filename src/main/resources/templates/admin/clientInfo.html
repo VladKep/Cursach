@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+  <p th:text="${client.getUsername()}"></p>
+  <p th:text="${client.getRole()}"></p>
+    <p th:text="'Phone: ' + ${client.getPhoneNumber()}"></p>
+    <p th:text="'Email: ' + ${client.getEmail()}"></p>
+</body>
+</html>
