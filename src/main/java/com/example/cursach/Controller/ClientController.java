@@ -3,6 +3,7 @@ package com.example.cursach.Controller;
 import com.example.cursach.Service.ParkingSpotService;
 import com.example.cursach.Security.ClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -34,8 +35,9 @@ public class ClientController {
         return "client/hello";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin")
     public String admin() {
-        return "admin/main";
+        return "admin/mainAdmin";
     }
 }
