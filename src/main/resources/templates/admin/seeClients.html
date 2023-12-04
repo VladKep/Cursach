@@ -16,12 +16,28 @@
         div {
             margin-bottom: 10px;
         }
-        p {
+        p, a {
             margin: 0;
             padding: 5px;
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
+        }
+        .client-info {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -32,17 +48,18 @@
             <h2>Адміністратори:</h2>
             <div th:each="client : ${clients}">
                 <div th:if="${client.getRole()} != 'ROLE_USER'">
-                    <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
-            ' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
+                    <p th:text="'ID: ' + ${client.getId()} +
+                ' Name: ' + ${client.getUsername()} + ' '  + ' Phone: ' + ${client.getPhoneNumber()} +
+                ' Email: ' + ${client.getEmail()}"></p><hr>
                 </div>
             </div>
         </div>
 
         <h2>Клієнти:</h2>
         <div th:each="client : ${clients}">
-            <div th:if="${client.getRole()} != 'ROLE_ADMIN'">
-                <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()} + ' '  +
-          ' Phone: ' + ${client.getPhoneNumber()} + ' Email: ' + ${client.getEmail()}"></p><hr>
+            <div th:if="${client.getRole()} != 'ROLE_ADMIN'" class="client-info">
+                <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()}"></p><hr>
+                <a th:href="@{/admin/clients/{id}(id=${client.getId()})}"><input type="submit" value="Редагувати"></a>
             </div>
         </div>
     </div>

@@ -20,4 +20,9 @@ public class ClientServiceAdmin {
     public List<Client> clients() {
         return clientRepository.findAll();
     }
+
+    @PreAuthorize(("hasRole('ROLE_ADMIN')"))
+    public Client clientById(int id) {
+        return clientRepository.findById(id).orElseThrow();
+    }
 }

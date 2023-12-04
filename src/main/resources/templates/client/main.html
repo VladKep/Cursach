@@ -35,7 +35,9 @@
     </style>
 </head>
 <body>
-<a href="/available">To available stops</a>
+<a href="/available">До вільних місць</a>
+<br><br><br>
+<a href="/my-info">Мій аккаунт</a>
 <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
     <br><br><a href="/admin">На сторінку адміністратора</a>
 </div>
