@@ -13,10 +13,23 @@
       p {
         margin-bottom: 10px;
       }
+      a {
+          text-decoration: none;
+          padding: 10px;
+          background-color: #007bff;
+          color: #fff;
+          border-radius: 5px;
+      }
+      a:hover {
+          background-color: #0056b3;
+      }
     </style>
 </head>
 <body>
   <p th:text="${client.getUsername()}"></p>
-  <p th:text="${client.getClient().getRole()}"></p>
+  <p th:text="${client.getEmail()}"></p>
+  <p th:text="${client.getPhoneNumber()}"></p>
+    <a href="/my-info/edit">Оновити дані</a><br><br><br>
+  <a href="/">На попередню сторінку</a>
 </body>
 </html>

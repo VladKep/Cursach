@@ -16,7 +16,7 @@
         div {
             margin-bottom: 10px;
         }
-        p, a {
+        p {
             margin: 0;
             padding: 5px;
             background-color: #fff;
@@ -43,6 +43,7 @@
 </head>
 <body>
     <h2>Користувачі:</h2>
+    <a href="/admin"><input type="submit" value="На головну сторінку адміністратора"></a>
     <div>
         <div>
             <h2>Адміністратори:</h2>
@@ -59,7 +60,7 @@
         <div th:each="client : ${clients}">
             <div th:if="${client.getRole()} != 'ROLE_ADMIN'" class="client-info">
                 <p th:text="'ID: ' + ${client.getId()} + ' Name: ' + ${client.getUsername()}"></p><hr>
-                <a th:href="@{/admin/clients/{id}(id=${client.getId()})}"><input type="submit" value="Редагувати"></a>
+                <a th:href="@{/admin/clients/{id}(id=${client.getId()})}"><input type="submit" value="Детальніше"></a>
             </div>
         </div>
     </div>

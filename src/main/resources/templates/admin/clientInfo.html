@@ -13,6 +13,17 @@
         p {
             margin-bottom: 10px;
         }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -20,5 +31,7 @@
   <p th:text="${client.getRole()}"></p>
     <p th:text="'Phone: ' + ${client.getPhoneNumber()}"></p>
     <p th:text="'Email: ' + ${client.getEmail()}"></p>
+  <a href="/admin/clients"><input type="submit" value="На попередню сторінку"></a><br><br>
+  <a th:href="@{/admin/clients/{id}/edit(id=${client.getId()})}"><input type="submit" value="Оновити дані"></a>
 </body>
 </html>
