@@ -32,7 +32,7 @@
     <p th:text="'Phone: ' + ${client.getPhoneNumber()}"></p>
     <p th:text="'Email: ' + ${client.getEmail()}"></p>
   <a href="/admin/clients"><input type="submit" value="На попередню сторінку"></a><br><br>
-  <a th:href="@{/admin/clients/{id}/reservations(id=${client.getId()})}">Резервації клієнта</a>
+  <a th:href="@{/admin/clients/{id}/reservations(id=${client.getId()})}"><input type="submit" value="Резервації клієнта"></a>
   <a th:href="@{/admin/clients/{id}/edit(id=${client.getId()})}"><input type="submit" value="Оновити дані"></a>
 </body>
 </html>

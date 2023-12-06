@@ -51,12 +51,12 @@ public class ClientController {
         return "client/clientInfo";
     }
 
-//    @GetMapping("/reservation")
-//    public String myReservations(Model model, @AuthenticationPrincipal ClientDetails clientDetails) {
-//        int id = clientDetails.getClient().getId();
-//        model.addAttribute("reservations", clientServiceAdmin.clientById(id).getNotes());
-//        return "client/myReservations";
-//    }
+    @GetMapping("/reservation")
+    public String myReservations(Model model, @AuthenticationPrincipal ClientDetails clientDetails) {
+        int id = clientDetails.getClient().getId();
+        model.addAttribute("reservations", clientServiceAdmin.clientById(id).getNotes());
+        return "client/myReservations";
+    }
 
     @GetMapping("/my-info/edit")
     public String edit(@AuthenticationPrincipal ClientDetails clientDetails, Model model) {

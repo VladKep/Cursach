@@ -26,7 +26,7 @@ public class ClientServiceAdmin {
         return clientRepository.findById(id).orElseThrow();
     }
 
-    @PreAuthorize(("hasRole('ROLE_ADMIN')"))
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void update(int id, Client client) {
         Client client1 = clientRepository.findById(id).orElseThrow();

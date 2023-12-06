@@ -1,13 +1,8 @@
 package com.example.cursach.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.sql.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -42,9 +37,9 @@ public class Note {
     @Override
     public String toString() {
         return "Id=" + id +
-                ", Final Price=" + finalPrice +
-                ", Start=" + startDate +
-                ", End=" + endDate +
-                ", Parking Spot=" + parkingSpot.toStringInfo();
+                ",\nFinal Price=" + finalPrice +
+                ",\nStart=" + startDate +
+                ",\nEnd=" + endDate +
+                ",\nParking Spot=" + parkingSpot.toStringInfo() + "\n";
     }
 }
