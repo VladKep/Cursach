@@ -1,24 +1,36 @@
 package com.example.cursach.Controller;
 
 import com.example.cursach.Model.Client;
+import com.example.cursach.Model.Note;
+import com.example.cursach.Model.ParkingSpot;
 import com.example.cursach.Service.ClientService;
 import com.example.cursach.Security.ClientDetails;
 import com.example.cursach.Service.ClientServiceAdmin;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.cursach.Service.NoteService;
+import com.example.cursach.Service.ParkingSpotService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ClientController {
-    @Autowired
-    private ClientService clientService;
-    private ClientServiceAdmin clientServiceAdmin;
+    private final ClientService clientService;
+    private final ClientServiceAdmin clientServiceAdmin;
+    private final ParkingSpotService parkingSpotService;
+    private final NoteService noteService;
+
+    public ClientController(ClientService clientService, ClientServiceAdmin clientServiceAdmin, ParkingSpotService parkingSpotService, NoteService noteService) {
+        this.clientService = clientService;
+        this.clientServiceAdmin = clientServiceAdmin;
+        this.parkingSpotService = parkingSpotService;
+        this.noteService = noteService;
+    }
 
     @GetMapping("")
     public String mainPage() {
@@ -27,16 +39,24 @@ public class ClientController {
 
     @GetMapping("/available")
     public String availableSpots(Model model) {
-        System.out.println(clientService.availableParkingSpots());
         model.addAttribute("available", clientService.availableParkingSpots());
         return "client/freeSpots";
     }
 
     @GetMapping("/my-info")
     public String userInfo(@AuthenticationPrincipal ClientDetails clientDetails, Model model) {
-        model.addAttribute("client", clientDetails.getClient());
+        //model.addAttribute("client", clientDetails.getClient());
+        Client client = clientServiceAdmin.clientById(clientDetails.getClient().getId());
+        model.addAttribute("client", client);
         return "client/clientInfo";
     }
+
+//    @GetMapping("/reservation")
+//    public String myReservations(Model model, @AuthenticationPrincipal ClientDetails clientDetails) {
+//        int id = clientDetails.getClient().getId();
+//        model.addAttribute("reservations", clientServiceAdmin.clientById(id).getNotes());
+//        return "client/myReservations";
+//    }
 
     @GetMapping("/my-info/edit")
     public String edit(@AuthenticationPrincipal ClientDetails clientDetails, Model model) {
@@ -49,6 +69,37 @@ public class ClientController {
         clientService.update(id, client);
         return "redirect:/my-info";
     }
+
+    @GetMapping("/available/{id}/reservation")
+    public String reservation(@PathVariable("id") int id, Model model) {
+        model.addAttribute("spot", parkingSpotService.findById(id));
+        model.addAttribute("note", new Note());
+        return "client/spotReservation";
+    }
+
+    @PostMapping("/available/{id}")
+    public String reserv(@ModelAttribute("note") Note note, @PathVariable("id") int id,
+                         @AuthenticationPrincipal ClientDetails clientDetails) {
+        note.setClient(clientDetails.getClient());
+        ParkingSpot parkingSpot = parkingSpotService.findById(id);
+        note.setParkingSpot(parkingSpot);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime start = LocalDateTime.parse(note.getStartDate(), formatter);
+        LocalDateTime end = LocalDateTime.parse(note.getEndDate(), formatter);
+        note.setFinalPrice((float) parkingSpot.getPrice() * (Duration.between(start, end).toMinutes() / 60));
+        clientService.reservation(note);
+        parkingSpotService.change(note.getParkingSpot().getId(), "Зайнято");
+        return "redirect:/confirm/{id}";
+    }
+
+    @GetMapping("/confirm/{id}")
+    public String confirmation(Model model, @PathVariable("id") int id) {
+        model.addAttribute("note", noteService.findById(id));
+        return "client/confirmReserv";
+    }
+
+
+
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin")

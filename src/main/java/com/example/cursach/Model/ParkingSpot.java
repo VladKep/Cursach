@@ -17,29 +17,34 @@ public class ParkingSpot {
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotEmpty
     @Column(name = "Address")
     private String address;
-    @NotEmpty
     @Column(name = "Status")
     private String status;
-    @NotEmpty
     @Column(name = "Price")
     private int price;
+    @Column(name = "SpotNumber")
+    private int spoNumber;
     @OneToMany(mappedBy = "parkingSpot", cascade = CascadeType.PERSIST)
     private List<Note> notes;
 
-    public ParkingSpot(String address, String status, int price, List<Note> notes) {
+    public ParkingSpot(String address, String status, int price, int spoNumber) {
         this.address = address;
         this.status = status;
         this.price = price;
-        this.notes = notes;
+        this.spoNumber = spoNumber;
     }
 
     @Override
     public String toString() {
         return "address='" + address + '\'' +
+                ",number='" + spoNumber + '\'' +
                 ", status='" + status + '\'' +
                 ", price=" + price;
+    }
+
+    public String toStringInfo() {
+        return "address='" + address + '\'' +
+                ",number='" + spoNumber + '\'';
     }
 }

@@ -26,10 +26,11 @@
     </style>
 </head>
 <body>
-  <p th:text="${client.getUsername()}"></p>
-  <p th:text="${client.getEmail()}"></p>
-  <p th:text="${client.getPhoneNumber()}"></p>
     <a href="/my-info/edit">Оновити дані</a><br><br><br>
-  <a href="/">На попередню сторінку</a>
+    <a href="/">На попередню сторінку</a>
+      <p th:text="${client.getUsername()}"></p>
+      <p th:text="${client.getEmail()}"></p>
+      <p th:text="${client.getPhoneNumber()}"></p>
+    <a th:href="@{/reservations}">Мої резервації</a>
 </body>
 </html>

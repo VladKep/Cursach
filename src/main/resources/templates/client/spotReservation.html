@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <title>Reservation</title>
     <style>
         form {
             background-color: #b1b1b1;
@@ -39,19 +39,13 @@
     </style>
 </head>
 <body>
-<form th:method="POST" th:action="@{/admin/clients/{id}/update(id=${client.getId()})}" th:object="${client}">
-    <label for="username">Введіть ім'я</label>
-    <input type="text" th:field="*{username}" id="username">
-    <label for="phoneNumber">Введіть телефон</label>
-    <input type="text" th:field="*{phoneNumber}" id="phoneNumber">
-    <label for="email">Введіть пошту</label>
-    <input type="text" th:field="*{email}" id="email">
-    <label for="role">Введіть роль</label>
-    <input type="text" th:field="*{role}" id="role">
-    <label for="password">Введіть пароль</label>
-    <input type="text" th:field="*{password}" id="password">
-    <br>
-    <input type="submit" value="Оновити">
-</form>
+    <form th:method="POST" th:action="@{/available/{id}(id=${spot.getId()})}" th:object="${note}">
+        <label for="startD">Введіть час прибуття("yyyy-MM-dd HH:mm:ss")</label>
+        <input type="text" th:field="*{startDate}" id="startD"><br>
+        <label for="endD">Введіть час відбуття("yyyy-MM-dd HH:mm:ss")</label>
+        <input type="text" th:field="*{endDate}" id="endD">
+        <br>
+        <a th:href="@{/confirm/{id}(id=${note.getId()})}"><input type="submit" value="Зарезервувати"></a>
+    </form>
 </body>
 </html>

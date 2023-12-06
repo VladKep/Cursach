@@ -28,7 +28,7 @@ public class Client {
     @NotEmpty
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Note> notes;
     @Column(name = "Role")
     private String role;

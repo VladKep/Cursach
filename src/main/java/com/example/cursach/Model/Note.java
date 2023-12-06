@@ -18,12 +18,12 @@ public class Note {
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "StartTime")
-    private LocalDateTime startTime;
-    @Column(name = "EndTime")
-    private LocalDateTime endTime;
+    @Column(name = "StartDate")
+    private String startDate;
+    @Column(name = "EndDate")
+    private String endDate;
     @Column(name = "FinalPrice")
-    private Double finalPrice;
+    private Float finalPrice;
     @ManyToOne
     @JoinColumn(name = "Client_ID", referencedColumnName = "ID")
     private Client client;
@@ -31,10 +31,10 @@ public class Note {
     @JoinColumn(name = "ParkingSpot_ID", referencedColumnName = "ID")
     private ParkingSpot parkingSpot;
 
-    public Note(LocalDateTime startTime, LocalDateTime endTime, Client client, ParkingSpot parkingSpot) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.finalPrice = (double) parkingSpot.getPrice() * Duration.between(startTime, endTime).toHours();
+    public Note(String startDate, String endDate, Float finalPrice, Client client, ParkingSpot parkingSpot) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.finalPrice = finalPrice;
         this.client = client;
         this.parkingSpot = parkingSpot;
     }
@@ -42,10 +42,9 @@ public class Note {
     @Override
     public String toString() {
         return "Id=" + id +
-                ", Start Time=" + startTime +
-                ", End Time=" + endTime +
                 ", Final Price=" + finalPrice +
-                ", Client=" + client.getUsername() +
-                ", Parking Spot=" + parkingSpot.getAddress();
+                ", Start=" + startDate +
+                ", End=" + endDate +
+                ", Parking Spot=" + parkingSpot.toStringInfo();
     }
 }
