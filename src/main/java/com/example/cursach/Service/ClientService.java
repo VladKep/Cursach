@@ -26,8 +26,7 @@ public class ClientService {
     }
 
     @Transactional
-    public void reservation(LocalDateTime start, LocalDateTime end, Client client, ParkingSpot parkingSpot) {
-        Note note = new Note(start, end, client, parkingSpot);
+    public void reservation(Note note) {
         noteRepository.save(note);
     }
 

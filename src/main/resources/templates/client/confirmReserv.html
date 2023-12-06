@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
+    <style>
+        h2 {
+            color: #333;
+            font-family: Georgia;
+        }
+        a {
+            text-decoration: none;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2 th:text="'Ціна: ' + ${note.getFinalPrice()} + 'грн.'"></h2>
+    <a href="/">Підтвердити</a>
+</body>
+</html>

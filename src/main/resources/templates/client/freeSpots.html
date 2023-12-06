@@ -26,13 +26,26 @@
         hr {
             border: 1px solid #ddd;
         }
+        a {
+            text-decoration: none;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <h2>Вільні місця</h2>
     <div>
         <div th:each="av : ${available}">
-            <p th:text="'ID: ' + ${av.getId()} + ' Адреса: ' + ${av.getAddress()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p><hr>
+            <p th:text="'ID: ' + ${av.getId()} + ' Адреса: ' + ${av.getAddress()} +
+             ' Номер: ' + ${av.getSpoNumber()} + ' Вартість: ' + ${av.getPrice()} + 'грн.'"></p><br>
+            <a th:href="@{/available/{id}/reservation(id=${av.getId()})}">Зарезервувати місце</a>
+            <hr>
         </div>
     </div>
 
