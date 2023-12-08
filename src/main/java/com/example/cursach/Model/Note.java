@@ -22,16 +22,19 @@ public class Note {
     @ManyToOne
     @JoinColumn(name = "Client_ID", referencedColumnName = "ID")
     private Client client;
+    @Column(name = "Status")
+    private String status;
     @ManyToOne
     @JoinColumn(name = "ParkingSpot_ID", referencedColumnName = "ID")
     private ParkingSpot parkingSpot;
 
-    public Note(String startDate, String endDate, Float finalPrice, Client client, ParkingSpot parkingSpot) {
+    public Note(String startDate, String endDate, Float finalPrice, Client client, ParkingSpot parkingSpot, String status) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.finalPrice = finalPrice;
         this.client = client;
         this.parkingSpot = parkingSpot;
+        this.status = "Активне";
     }
 
     @Override

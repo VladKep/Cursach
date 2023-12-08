@@ -17,7 +17,6 @@ public class ClientServiceAdmin {
         this.clientRepository = clientRepository;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Client> clients() {
         return clientRepository.findAll();
     }
@@ -26,7 +25,6 @@ public class ClientServiceAdmin {
         return clientRepository.findById(id).orElseThrow();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void update(int id, Client client) {
         Client client1 = clientRepository.findById(id).orElseThrow();

@@ -16,6 +16,22 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -23,7 +39,11 @@
         <p th:text="'Start: ' + ${reservation.getStartDate()}"></p>
         <p th:text="'End: ' + ${reservation.getEndDate()}"></p>
         <p th:text="'Spot: ' + ${reservation.getParkingSpot().toStringInfo()}"></p>
-        <p th:text="'Price: ' + ${reservation.getFinalPrice()}"></p>
+        <p th:text="'Price: ' + ${reservation.getFinalPrice()}"></p><br>
+        <p th:text="'Status: ' + ${reservation.getStatus()}"></p>
+        <form method="POST" th:href="@{/reservations/{id}(id=${reservation.getId()})}">
+            <input type="submit" value="Видалити">
+        </form><br>
         <hr>
     </div>
 </body>
