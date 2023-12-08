@@ -45,7 +45,7 @@
         <label for="endD">Введіть час відбуття("yyyy-MM-dd HH:mm:ss")</label>
         <input type="text" th:field="*{endDate}" id="endD">
         <br>
-        <a th:href="@{/confirm/{id}(id=${note.getId()})}"><input type="submit" value="Зарезервувати"></a>
+        <a th:href="@{/confirm/{id}(id=${spot.getId()})}"><input type="submit" value="Зарезервувати"></a>
     </form>
 </body>
 </html>

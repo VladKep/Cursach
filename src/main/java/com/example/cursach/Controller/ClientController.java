@@ -3,6 +3,8 @@ package com.example.cursach.Controller;
 import com.example.cursach.Model.Client;
 import com.example.cursach.Model.Note;
 import com.example.cursach.Model.ParkingSpot;
+import com.example.cursach.Repository.NoteRepository;
+import com.example.cursach.Repository.ParkingSpotRepository;
 import com.example.cursach.Service.ClientService;
 import com.example.cursach.Security.ClientDetails;
 import com.example.cursach.Service.ClientServiceAdmin;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 public class ClientController {
@@ -24,12 +29,16 @@ public class ClientController {
     private final ClientServiceAdmin clientServiceAdmin;
     private final ParkingSpotService parkingSpotService;
     private final NoteService noteService;
+    private final ParkingSpotRepository parkingSpotRepository;
+    private final NoteRepository noteRepository;
 
-    public ClientController(ClientService clientService, ClientServiceAdmin clientServiceAdmin, ParkingSpotService parkingSpotService, NoteService noteService) {
+    public ClientController(ClientService clientService, ClientServiceAdmin clientServiceAdmin, ParkingSpotService parkingSpotService, NoteService noteService, ParkingSpotRepository parkingSpotRepository, NoteRepository noteRepository) {
         this.clientService = clientService;
         this.clientServiceAdmin = clientServiceAdmin;
         this.parkingSpotService = parkingSpotService;
         this.noteService = noteService;
+        this.parkingSpotRepository = parkingSpotRepository;
+        this.noteRepository = noteRepository;
     }
 
     @GetMapping("")
@@ -60,7 +69,8 @@ public class ClientController {
 
     @GetMapping("/my-info/edit")
     public String edit(@AuthenticationPrincipal ClientDetails clientDetails, Model model) {
-        model.addAttribute("client", clientDetails.getClient());
+        Client client = clientServiceAdmin.clientById(clientDetails.getClient().getId());
+        model.addAttribute("client", client);
         return "client/clientInfoEdit";
     }
 
@@ -78,24 +88,45 @@ public class ClientController {
     }
 
     @PostMapping("/available/{id}")
-    public String reserv(@ModelAttribute("note") Note note, @PathVariable("id") int id,
-                         @AuthenticationPrincipal ClientDetails clientDetails) {
-        note.setClient(clientDetails.getClient());
+    public String reserv(@ModelAttribute("note") Note note,
+                         @PathVariable("id") int id, @AuthenticationPrincipal ClientDetails clientDetails) {
+        Note note1 = new Note();
+        note1.setClient(clientDetails.getClient());
         ParkingSpot parkingSpot = parkingSpotService.findById(id);
-        note.setParkingSpot(parkingSpot);
+        note1.setParkingSpot(parkingSpot);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime start = LocalDateTime.parse(note.getStartDate(), formatter);
+        note1.setStartDate(note.getStartDate());
+        note1.setEndDate(note.getEndDate());
         LocalDateTime end = LocalDateTime.parse(note.getEndDate(), formatter);
-        note.setFinalPrice((float) parkingSpot.getPrice() * (Duration.between(start, end).toMinutes() / 60));
-        clientService.reservation(note);
-        parkingSpotService.change(note.getParkingSpot().getId(), "Зайнято");
+        note1.setFinalPrice((float) parkingSpot.getPrice() * (Duration.between(start, end).toHours()));
+        note1.setStatus("Активне");
+        clientService.reservation(note1);
+        parkingSpot.setStatus("Зайнято");
+        parkingSpotRepository.save(parkingSpot);
         return "redirect:/confirm/{id}";
     }
 
     @GetMapping("/confirm/{id}")
-    public String confirmation(Model model, @PathVariable("id") int id) {
-        model.addAttribute("note", noteService.findById(id));
-        return "client/confirmReserv";
+    public String confirmation(Model model, @PathVariable("id") int id){
+        ParkingSpot parkingSpot = parkingSpotService.findById(id);
+        List<Note> notes = noteRepository.findByParkingSpot(parkingSpot);
+        Optional<Note> activeNote = notes.stream()
+                .filter(note -> "Активне".equals(note.getStatus()))
+                .findFirst();
+        if (activeNote.isPresent()) {
+            model.addAttribute("note", activeNote.get());
+            return "client/confirmReserv";
+        } else {
+            throw new NoSuchElementException("Не удалось найти активную запись для парковочного места с ID: " + id);
+        }
+    }
+
+
+    @PostMapping("/reservations/{id}")
+    public String deleteReservation(@PathVariable("id") int id) {
+        noteService.deleteNote(id);
+        return "redirect:/reservation";
     }
 
 

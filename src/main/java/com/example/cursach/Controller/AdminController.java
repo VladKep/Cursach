@@ -17,6 +17,7 @@ public class AdminController {
         this.clientServiceAdmin = clientServiceAdmin;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/clients")
     public String clients(Model model) {
         model.addAttribute("clients", clientServiceAdmin.clients());
