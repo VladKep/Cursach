@@ -102,7 +102,8 @@ public class ClientController {
         note1.setStartDate(note.getStartDate());
         note1.setEndDate(note.getEndDate());
         LocalDateTime end = LocalDateTime.parse(note.getEndDate(), formatter);
-        note1.setFinalPrice((float) parkingSpot.getPrice() * (Duration.between(start, end).toMinutes()) / 60);
+        Float price = (float) parkingSpot.getPrice() * Duration.between(start, end).toMinutes() / 60;
+        note1.setFinalPrice(price);
         note1.setStatus("Активне");
         clientService.reservation(note1);
         parkingSpot.setStatus("Зайнято");
