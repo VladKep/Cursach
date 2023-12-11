@@ -1,7 +1,6 @@
 package com.example.cursach.Controller;
 
 import com.example.cursach.Model.Client;
-import com.example.cursach.Model.Note;
 import com.example.cursach.Service.ClientServiceAdmin;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

@@ -32,7 +32,10 @@ public class ClientController {
     private final ParkingSpotRepository parkingSpotRepository;
     private final NoteRepository noteRepository;
 
-    public ClientController(ClientService clientService, ClientServiceAdmin clientServiceAdmin, ParkingSpotService parkingSpotService, NoteService noteService, ParkingSpotRepository parkingSpotRepository, NoteRepository noteRepository) {
+    public ClientController(ClientService clientService, ClientServiceAdmin clientServiceAdmin,
+                            ParkingSpotService parkingSpotService,
+                            NoteService noteService, ParkingSpotRepository parkingSpotRepository,
+                            NoteRepository noteRepository) {
         this.clientService = clientService;
         this.clientServiceAdmin = clientServiceAdmin;
         this.parkingSpotService = parkingSpotService;
@@ -99,7 +102,7 @@ public class ClientController {
         note1.setStartDate(note.getStartDate());
         note1.setEndDate(note.getEndDate());
         LocalDateTime end = LocalDateTime.parse(note.getEndDate(), formatter);
-        note1.setFinalPrice((float) parkingSpot.getPrice() * (Duration.between(start, end).toHours()));
+        note1.setFinalPrice((float) parkingSpot.getPrice() * (Duration.between(start, end).toMinutes()) / 60);
         note1.setStatus("Активне");
         clientService.reservation(note1);
         parkingSpot.setStatus("Зайнято");
@@ -122,12 +125,11 @@ public class ClientController {
         }
     }
 
-
-    @PostMapping("/reservations/{id}")
-    public String deleteReservation(@PathVariable("id") int id) {
-        noteService.deleteNote(id);
-        return "redirect:/reservation";
-    }
+//    @PostMapping("/reservations/{id}")
+//    public String deleteReservation(@PathVariable("id") int id) {
+//        noteService.deleteNote(id);
+//        return "redirect:/reservation";
+//    }
 
 
 
