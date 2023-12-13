@@ -41,9 +41,6 @@
         <p th:text="'Spot: ' + ${reservation.getParkingSpot().toStringInfo()}"></p>
         <p th:text="'Price: ' + ${reservation.getFinalPrice()}"></p><br>
         <p th:text="'Status: ' + ${reservation.getStatus()}"></p>
-        <form method="POST" th:href="@{/reservations/{id}(id=${reservation.getId()})}">
-            <input type="submit" value="Видалити">
-        </form><br>
         <hr>
     </div>
 </body>

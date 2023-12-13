@@ -122,16 +122,9 @@ public class ClientController {
             model.addAttribute("note", activeNote.get());
             return "client/confirmReserv";
         } else {
-            throw new NoSuchElementException("Не удалось найти активную запись для парковочного места с ID: " + id);
+            throw new NoSuchElementException("Не вдалося знайти запис для паркувального місця з ID: " + id);
         }
     }
-
-//    @PostMapping("/reservations/{id}")
-//    public String deleteReservation(@PathVariable("id") int id) {
-//        noteService.deleteNote(id);
-//        return "redirect:/reservation";
-//    }
-
 
 
 
