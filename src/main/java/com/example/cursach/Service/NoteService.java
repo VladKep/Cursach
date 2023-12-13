@@ -24,14 +24,6 @@ public class NoteService {
         return noteRepository.findById(id).orElseThrow();
     }
 
-//    @Transactional
-//    public void deleteNote(int id) {
-//        Note note = findById(id);
-//        ParkingSpot parkingSpot = note.getParkingSpot();
-//        parkingSpot.setStatus("Вільно");
-//        noteRepository.deleteById(note.getId());
-//    }
-
     @Transactional
     @Scheduled(fixedRate = 60000)
     public void changeSpotStatus() {
